@@ -981,6 +981,18 @@ public static class ConfigHandler
         {
             return -1;
         }
+        if (profileItem.Security.IsNullOrEmpty())
+        {
+            profileItem.Security = Global.None;
+        }
+        if (profileItem.Network == "tcp" && profileItem.HeaderType.IsNullOrEmpty())
+        {
+            profileItem.HeaderType = Global.None;
+        }
+        if (profileItem.StreamSecurity.IsNullOrEmpty())
+        {
+            profileItem.StreamSecurity = Global.None;
+        }
 
         await AddServerCommon(config, profileItem, toFile);
 
@@ -1119,7 +1131,7 @@ public static class ConfigHandler
                && AreEqual(oProtocolExtra.SalamanderPass, nProtocolExtra.SalamanderPass)
                && AreEqual(o.Sni, n.Sni)
                && AreEqual(o.Alpn, n.Alpn)
-               && AreEqual(o.Fingerprint, n.Fingerprint)
+               //&& AreEqual(o.Fingerprint, n.Fingerprint)
                && AreEqual(o.PublicKey, n.PublicKey)
                && AreEqual(o.ShortId, n.ShortId)
                && (!remarks || o.Remarks == n.Remarks);
